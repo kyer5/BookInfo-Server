@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>--- Board-02 도서목록 ---</title>
+</head>
+<body>
+<a href="/">Home</a>
+<table border="1">
+  <tr>
+    <th>bookid</th>
+    <th>bookname</th>
+    <th>publisher</th>
+    <th>price</th>
+  </tr>
+  <tr th:each="board: ${bookList}">
+    <td>
+      <a th:text="${board.bookid}" th:href="@{/{id}(id=${board.bookid})}"></a>
+    </td>
+    <td th:text="${board.bookname}"></td>
+    <td th:text="${board.publisher}"></td>
+    <td th:text="${board.price}"></td>
+  </tr>
+</table>
+</body>
+</html>
