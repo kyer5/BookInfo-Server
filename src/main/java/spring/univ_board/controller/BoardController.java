@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import spring.univ_board.dto.BoardDTO;
+import spring.univ_board.dto.BoardDto;
 import spring.univ_board.service.BoardService;
 
 import java.util.List;
@@ -22,8 +22,8 @@ public class BoardController {
      */
     @GetMapping("/list")
     public String getList(Model model) {
-        List<BoardDTO> boardDTOS = boardService.getList();
-        model.addAttribute("bookList", boardDTOS);
+        List<BoardDto> boardDtos = boardService.getList();
+        model.addAttribute("bookList", boardDtos);
         return "bookList";
     }
 
@@ -40,8 +40,8 @@ public class BoardController {
      * 도서 추가 (DB 저장)
      */
     @PostMapping("/addBook")
-    public void save(BoardDTO boardDTO) {
-        boardService.save(boardDTO);
+    public void save(BoardDto boardDto) {
+        boardService.save(boardDto);
     }
 
     /**
@@ -49,8 +49,8 @@ public class BoardController {
      */
     @GetMapping("/{id}")
     public String detail(@PathVariable("id") Integer id, Model model) {
-        BoardDTO boardDTO = boardService.detail(id);
-        model.addAttribute("bookDetail", boardDTO);
+        BoardDto boardDto = boardService.detail(id);
+        model.addAttribute("bookDetail", boardDto);
         return "detailBook";
     }
 
@@ -68,8 +68,8 @@ public class BoardController {
      */
     @GetMapping("/goUpdate/{id}")
     public String goUpdate(@PathVariable("id") Integer id, Model model) {
-        BoardDTO boardDTO = boardService.detail(id);
-        model.addAttribute("bookDetail", boardDTO);
+        BoardDto boardDto = boardService.detail(id);
+        model.addAttribute("bookDetail", boardDto);
         return "updateBook";
     }
 
@@ -77,11 +77,11 @@ public class BoardController {
      * 도서 정보 수정
      */
     @PostMapping("/goUpdate/{id}")
-    public String goUpdate(BoardDTO boardDTO, Model model) {
-        boardService.goUpdate(boardDTO); // 업데이트 작업 요청
+    public String goUpdate(BoardDto boardDto, Model model) {
+        boardService.goUpdate(boardDto); // 업데이트 작업 요청
 
         // update 완료 후, 수정된 내용을 다시 조회
-        BoardDTO dto = boardService.detail(boardDTO.getBookid());
+        BoardDto dto = boardService.detail(boardDto.getBookid());
         model.addAttribute("bookDetail", dto);
         return "detailBook";
     }

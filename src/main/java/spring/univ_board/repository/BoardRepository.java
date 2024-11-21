@@ -3,7 +3,7 @@ package spring.univ_board.repository;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-import spring.univ_board.dto.BoardDTO;
+import spring.univ_board.dto.BoardDto;
 
 import java.util.List;
 
@@ -16,21 +16,21 @@ public class BoardRepository {
     /**
      * 도서 목록 조회
      */
-    public List<BoardDTO> getList() {
+    public List<BoardDto> getList() {
         return sql.selectList("Board.getList"); // Board -> mapper. namespace = "Board"
     }
 
     /**
      * 도서 저장
      */
-    public void save(BoardDTO boardDTO) {
-        sql.insert("Board.save", boardDTO);
+    public void save(BoardDto boardDto) {
+        sql.insert("Board.save", boardDto);
     }
 
     /**
      * 도서 상세 정보
      */
-    public BoardDTO detail(Integer id) {
+    public BoardDto detail(Integer id) {
         return sql.selectOne("Board.detail", id);
     }
 
@@ -38,7 +38,7 @@ public class BoardRepository {
         sql.delete("Board.goDelete", id);
     }
 
-    public void goUpdate(BoardDTO boardDTO) {
+    public void goUpdate(BoardDto boardDTO) {
         sql.update("Board.goUpdate", boardDTO);
     }
 }

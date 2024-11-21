@@ -11,7 +11,7 @@
     <typeAliases>
         <!--클래스 alias가 들어갈 공간-->
         <typeAlias type="spring.univ_board.controller.IndexController" alias="IndexController"/>
-        <typeAlias type="spring.univ_board.dto.BoardDTO" alias="board"/> <!--alias: type 경로의 별명-->
+        <typeAlias type="spring.univ_board.dto.BoardDto" alias="board"/> <!--alias: type 경로의 별명-->
         <!--IndexController 예시-->
     </typeAliases>
 </configuration>

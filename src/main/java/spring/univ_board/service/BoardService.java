@@ -2,7 +2,7 @@ package spring.univ_board.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import spring.univ_board.dto.BoardDTO;
+import spring.univ_board.dto.BoardDto;
 import spring.univ_board.repository.BoardRepository;
 
 import java.util.List;
@@ -16,21 +16,21 @@ public class BoardService {
     /**
      * 도서 목록 조회
      */
-    public List<BoardDTO> getList() {
+    public List<BoardDto> getList() {
         return boardRepository.getList();
     }
 
     /**
      * 도서 저장
      */
-    public void save(BoardDTO boardDTO) {
-        boardRepository.save(boardDTO);
+    public void save(BoardDto boardDto) {
+        boardRepository.save(boardDto);
     }
 
     /**
      * 도서 상세 정보 가져오기
      */
-    public BoardDTO detail(Integer id) {
+    public BoardDto detail(Integer id) {
         return boardRepository.detail(id);
     }
 
@@ -44,7 +44,7 @@ public class BoardService {
     /**
      * 도서 정보 수정하기
      */
-    public void goUpdate(BoardDTO boardDTO) {
-        boardRepository.goUpdate(boardDTO);
+    public void goUpdate(BoardDto boardDto) {
+        boardRepository.goUpdate(boardDto);
     }
 }
