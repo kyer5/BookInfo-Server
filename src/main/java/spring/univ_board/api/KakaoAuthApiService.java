@@ -119,7 +119,6 @@ public class KakaoAuthApiService {
 
         KakaoUser kakaoUser = new KakaoUser();
         kakaoUser.setUsername(nickname);
-        kakaoUser.setCreatedAt(LocalDateTime.now());
         kakaoRepository.save(kakaoUser);
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
