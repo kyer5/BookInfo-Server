@@ -24,7 +24,7 @@ public class BoardController {
     public String getList(Model model) {
         List<BoardDto> boardDtos = boardService.getList();
         model.addAttribute("bookList", boardDtos);
-        return "bookList";
+        return "book/bookList";
     }
 
     /**
@@ -33,7 +33,7 @@ public class BoardController {
     @GetMapping("/addBook")
     public String addBook() {
         System.out.println("도서 추가 화면 컨트롤러");
-        return "addBook";
+        return "book/addBook";
     }
 
     /**
@@ -51,7 +51,7 @@ public class BoardController {
     public String detail(@PathVariable("id") Integer id, Model model) {
         BoardDto boardDto = boardService.detail(id);
         model.addAttribute("bookDetail", boardDto);
-        return "detailBook";
+        return "book/detailBook";
     }
 
     /**
@@ -60,7 +60,7 @@ public class BoardController {
     @GetMapping("/goDelete/{id}")
     public String goDelete(@PathVariable("id") Integer id) {
         boardService.goDelete(id);
-        return "redirect:/list";
+        return "book/redirect:/list";
     }
 
     /**
@@ -70,7 +70,7 @@ public class BoardController {
     public String goUpdate(@PathVariable("id") Integer id, Model model) {
         BoardDto boardDto = boardService.detail(id);
         model.addAttribute("bookDetail", boardDto);
-        return "updateBook";
+        return "book/updateBook";
     }
 
     /**
@@ -83,6 +83,6 @@ public class BoardController {
         // update 완료 후, 수정된 내용을 다시 조회
         BoardDto dto = boardService.detail(boardDto.getBookid());
         model.addAttribute("bookDetail", dto);
-        return "detailBook";
+        return "book/detailBook";
     }
 }
