@@ -6,20 +6,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import spring.univ_board.service.KakaoService;
 import spring.univ_board.domain.MsgEntity;
-import spring.univ_board.api.dto.KakaoDto;
-import spring.univ_board.api.KakaoAuthApiService;
+import spring.univ_board.dto.KakaoDto;
 
 @RestController // RESTful 웹 서비스의 컨트롤러
 @RequiredArgsConstructor
 @RequestMapping("kakao")
 public class KakaoController {
 
-    private final KakaoAuthApiService kakaoAuthApiService;
+    private final KakaoService kakaoService;
 
     @GetMapping("/login")
     public ResponseEntity<MsgEntity> callback(HttpServletRequest request) throws Exception {
-        KakaoDto kakaoInfo = kakaoAuthApiService.getKakaoInfo(request.getParameter("code"));
+        KakaoDto kakaoInfo = kakaoService.getKakaoInfo(request.getParameter("code"));
 
         return ResponseEntity.ok()
                 .body(new MsgEntity("Success", kakaoInfo));

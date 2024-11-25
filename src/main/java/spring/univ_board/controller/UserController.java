@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import spring.univ_board.api.KakaoAuthApiService;
 import spring.univ_board.controller.dto.ResponseDto;
 import spring.univ_board.controller.dto.request.SignUpRequest;
 import spring.univ_board.controller.dto.response.SignUpResponse;
+import spring.univ_board.service.KakaoService;
 import spring.univ_board.service.UserService;
 
 @Slf4j
@@ -20,12 +20,12 @@ import spring.univ_board.service.UserService;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final KakaoAuthApiService kakaoAuthApiService;
+    private final KakaoService kakaoService;
     private final UserService userService;
 
     @GetMapping("/login")
     public String login(Model model) { // 웹 페이지로 사용자를 리다이렉트하고, 해당 페이지에서는 Kakao 로그인 URL을 사용할 수 있도록 모델에 추가
-        model.addAttribute("kakaoUrl", kakaoAuthApiService.getKakaoLogin());
+        model.addAttribute("kakaoUrl", kakaoService.getKakaoLogin());
         return "user/login";
     }
 
