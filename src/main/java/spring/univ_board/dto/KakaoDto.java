@@ -1,4 +1,4 @@
-package spring.univ_board.api.dto;
+package spring.univ_board.dto;
 
 import lombok.Builder;
 import lombok.Data;
