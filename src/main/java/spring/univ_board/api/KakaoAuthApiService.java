@@ -21,8 +21,6 @@ import spring.univ_board.domain.KakaoUser;
 import spring.univ_board.api.dto.KakaoDto;
 import spring.univ_board.repository.KakaoRepository;
 
-import java.time.LocalDateTime;
-
 @Service
 @RequiredArgsConstructor // 의존성 주입
 public class KakaoAuthApiService {
