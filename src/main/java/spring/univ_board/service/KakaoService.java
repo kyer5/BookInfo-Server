@@ -64,7 +64,7 @@ public class KakaoService {
             params.add("redirect_uri", KAKAO_REDIRECT_URL);
 
             RestTemplate restTemplate = new RestTemplate();
-            HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(params, headers); // HTTP 요청에 필요한 헤더와 바디 생성
+            HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(params, headers);
 
             ResponseEntity<String> response = restTemplate.exchange(
                     KAKAO_AUTH_URI + "/oauth/token",
