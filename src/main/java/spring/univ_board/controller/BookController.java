@@ -11,7 +11,6 @@ import spring.univ_board.service.BookService;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class BookController {

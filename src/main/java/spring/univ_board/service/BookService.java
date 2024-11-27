@@ -1,6 +1,5 @@
 package spring.univ_board.service;
 
-import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 @Transactional(readOnly = true)
 @Service
 public class BookService {
