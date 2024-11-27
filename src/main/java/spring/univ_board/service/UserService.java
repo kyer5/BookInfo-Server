@@ -22,7 +22,8 @@ public class UserService {
     public LoginResponse login(final LoginRequest loginRequest) throws AuthenticationException {
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
-        User user = userRepository.findByEmail(email).orElseThrow();
+        User user = userRepository.findByEmail(email).
+                orElseThrow(() -> new AuthenticationException("This account does not exist."));
         validatePassword(password, user);
         return new LoginResponse(user.getId());
     }
