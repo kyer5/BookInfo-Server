@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import spring.univ_board.controller.dto.ResponseDto;
 import spring.univ_board.controller.dto.request.LoginRequest;
@@ -38,9 +37,9 @@ public class UserController {
     }
 
     @GetMapping("/login/kakao")
-    public String kakaoLogin(Model model) {
-        model.addAttribute("kakaoUrl", kakaoService.getKakaoLogin());
-        return "user/login";
+    public String kakaoLogin() {
+        String kakaoUrl = kakaoService.getKakaoLogin();
+        return "redirect:" + kakaoUrl;
     }
 
     @GetMapping("/signup")
