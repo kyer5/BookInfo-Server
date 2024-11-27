@@ -10,6 +10,8 @@ import spring.univ_board.controller.dto.response.LoginResponse;
 import spring.univ_board.domain.User;
 import spring.univ_board.repository.UserRepository;
 
+import javax.security.sasl.AuthenticationException;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -17,11 +19,12 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public LoginResponse login(final LoginRequest loginRequest) {
+    public LoginResponse login(final LoginRequest loginRequest) throws AuthenticationException {
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
         User user = userRepository.findByEmail(email).orElseThrow();
-        return checkPassword(password, user);
+        validatePassword(password, user);
+        return new LoginResponse(user.getId());
     }
 
     @Transactional
@@ -31,13 +34,12 @@ public class UserService {
         return savedUser.getId();
     }
 
-    private LoginResponse checkPassword(String password, User user) {
+    private void validatePassword(String password, User user) throws AuthenticationException {
         if (password.equals(user.getPassword())) {
             log.info("Login successful.");
-            return new LoginResponse(user.getId());
         } else {
             log.info("Password incorrect.");
-            return null;
+            throw new AuthenticationException("Password incorrect.");
         }
     }
 }

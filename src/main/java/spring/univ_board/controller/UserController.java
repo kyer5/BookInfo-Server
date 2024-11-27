@@ -11,9 +11,10 @@ import spring.univ_board.controller.dto.request.LoginRequest;
 import spring.univ_board.controller.dto.request.SignUpRequest;
 import spring.univ_board.controller.dto.response.LoginResponse;
 import spring.univ_board.controller.dto.response.SignUpResponse;
-import spring.univ_board.domain.User;
 import spring.univ_board.service.KakaoService;
 import spring.univ_board.service.UserService;
+
+import javax.security.sasl.AuthenticationException;
 
 @Slf4j
 @Controller
@@ -31,7 +32,7 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseDto<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseDto<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) throws AuthenticationException {
         LoginResponse loginResponse = userService.login(loginRequest);
         return ResponseDto.of(loginResponse, "You have successfully logged in.");
     }
