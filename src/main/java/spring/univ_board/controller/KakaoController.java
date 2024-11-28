@@ -8,7 +8,7 @@ import spring.univ_board.dto.KakaoDto;
 import spring.univ_board.service.KakaoService;
 
 @RestController
-@RequestMapping("kakao")
+@RequestMapping("/kakao")
 @RequiredArgsConstructor
 public class KakaoController {
 
