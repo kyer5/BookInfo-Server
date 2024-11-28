@@ -10,24 +10,24 @@ import lombok.ToString;
 @NoArgsConstructor
 public class BookListResponse {
 
-
+    private String imageURL;
     private String title;
     private String author;
-    private String imageURL;
-    private String discount;
     private String publisher;
-    private String isbn;
     private String pubdate;
+    private String discount;
+    private String isbn;
 
     @Builder
-    public BookListResponse(String title, String author, String imageURL,
-                            String discount, String publisher, String isbn, String pubdate) {
+
+    public BookListResponse(String imageURL, String title, String author,
+                            String publisher, String pubdate, String discount, String isbn) {
+        this.imageURL = imageURL;
         this.title = title;
         this.author = author;
-        this.imageURL = imageURL;
-        this.discount = discount;
         this.publisher = publisher;
-        this.isbn = isbn;
         this.pubdate = pubdate;
+        this.discount = discount;
+        this.isbn = isbn;
     }
 }
