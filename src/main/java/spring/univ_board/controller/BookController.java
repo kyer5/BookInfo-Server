@@ -25,4 +25,11 @@ public class BookController {
         return "book/naverBookList";
     }
 
+    @GetMapping("/detail")
+    public String bookDetails(@RequestParam String isbn, Model model) throws IOException {
+        BookDetailsResponse bookDetailsResponse = bookService.getBookDetails(isbn);
+        model.addAttribute("bookDetailsResponse", bookDetailsResponse);
+        return "book/detailsBook";
+    }
+
 }

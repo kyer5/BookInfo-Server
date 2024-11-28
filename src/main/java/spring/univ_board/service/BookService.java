@@ -81,4 +81,34 @@ public class BookService {
         return bookListResponses;
     }
 
+    public BookDetailsResponse getBookDetails(String isbnKey) throws IOException {
+        String encodedIsbn = URLEncoder.encode(isbnKey, "UTF-8");
+        String apiURL = API_URL + encodedIsbn;
+
+        JSONObject jsonObject = getBookInformation(apiURL);
+        JSONArray jsonArray = jsonObject.getJSONArray("items");
+        JSONObject bookInformation = jsonArray.getJSONObject(0);
+
+        String image = bookInformation.getString("image");
+        String title = bookInformation.getString("title");
+        String author = bookInformation.getString("author");
+        String publisher = bookInformation.getString("publisher");
+        String pubdate = bookInformation.getString("pubdate");
+        String discount = bookInformation.getString("discount");
+        String description = bookInformation.getString("description");
+        String isbn = bookInformation.getString("isbn");
+
+        BookDetailsResponse bookDetailsResponse = BookDetailsResponse.builder()
+                .imageURL(image)
+                .title(title)
+                .author(author)
+                .publisher(publisher)
+                .pubdate(pubdate)
+                .discount(discount)
+                .description(description)
+                .isbn(isbn)
+                .build();
+
+        return bookDetailsResponse;
+    }
 }
