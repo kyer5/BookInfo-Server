@@ -4,9 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import spring.univ_board.controller.dto.response.BookDetailsResponse;
 import spring.univ_board.controller.dto.response.BookListResponse;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -20,10 +22,9 @@ public class BookService {
 
     private final String CLIENT_ID = "nIwTTBRmq7Fwp1TqB1yo";
     private final String CLIENT_SECRET = "2IyFHrl8kR";
+    private final String API_URL = "https://openapi.naver.com/v1/search/book.json?query=";
 
-    public List<BookListResponse> getBookList(String keyword) throws Exception {
-        String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
-        String apiURL = "https://openapi.naver.com/v1/search/book.json?query=" + encodedKeyword;
+    private JSONObject getBookInformation(String apiURL) throws IOException {
         URL url = new URL(apiURL);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
@@ -46,29 +47,38 @@ public class BookService {
         br.close();
 
         JSONObject jsonObject = new JSONObject(response.toString());
+        return jsonObject;
+    }
+
+    public List<BookListResponse> getBookList(String keyword) throws IOException {
+        String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
+        String apiURL = API_URL + encodedKeyword;
+
+        JSONObject jsonObject = getBookInformation(apiURL);
         JSONArray jsonArray = jsonObject.getJSONArray("items");
         List<BookListResponse> bookListResponses = new ArrayList<>();
 
         for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject object = jsonArray.getJSONObject(i);
-            String title = object.getString("title");
-            String author = object.getString("author");
-            String image = object.getString("image");
-            String discount = object.getString("discount");
-            String publisher = object.getString("publisher");
-            String isbn = object.getString("isbn");
-            String pubdate = object.getString("pubdate");
+            JSONObject bookInformation = jsonArray.getJSONObject(i);
+            String image = bookInformation.getString("image");
+            String title = bookInformation.getString("title");
+            String author = bookInformation.getString("author");
+            String publisher = bookInformation.getString("publisher");
+            String pubdate = bookInformation.getString("pubdate");
+            String discount = bookInformation.getString("discount");
+            String isbn = bookInformation.getString("isbn");
 
             bookListResponses.add(BookListResponse.builder()
+                    .imageURL(image)
                     .title(title)
                     .author(author)
-                    .imageURL(image)
-                    .discount(discount)
                     .publisher(publisher)
-                    .isbn(isbn)
                     .pubdate(pubdate)
+                    .discount(discount)
+                    .isbn(isbn)
                     .build());
         }
         return bookListResponses;
     }
+
 }
