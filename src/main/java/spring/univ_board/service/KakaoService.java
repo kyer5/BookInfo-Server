@@ -17,6 +17,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import spring.univ_board.controller.dto.request.KakaoLoginRequest;
 import spring.univ_board.domain.User;
 import spring.univ_board.dto.KakaoDto;
 import spring.univ_board.repository.UserRepository;
@@ -102,12 +103,11 @@ public class KakaoService {
         JSONObject account = (JSONObject) jsonObj.get("kakao_account");
         JSONObject profile = (JSONObject) account.get("profile");
 
-        String nickname = String.valueOf(profile.get("nickname"));
         String email = String.valueOf(account.get("email"));
+        String nickname = String.valueOf(profile.get("nickname"));
 
-        User kakaoUser = new User();
-        kakaoUser.setNickname(nickname);
-        kakaoUser.setEmail(email);
+        KakaoLoginRequest kakaoLoginRequest = new KakaoLoginRequest(email, nickname);
+        User kakaoUser = User.kakaoLogin(kakaoLoginRequest);
         if (userRepository.findByEmail(email).isEmpty()) {
             userRepository.save(kakaoUser);
         }

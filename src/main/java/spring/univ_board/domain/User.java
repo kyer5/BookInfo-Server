@@ -6,6 +6,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Builder;
 import lombok.Getter;
+import spring.univ_board.controller.dto.request.KakaoLoginRequest;
 import spring.univ_board.controller.dto.request.SignUpRequest;
 import spring.univ_board.domain.value.AccountType;
 
@@ -48,6 +49,14 @@ public class User extends BaseEntity {
                 .password(signUpRequest.getPassword())
                 .phone(signUpRequest.getPhone())
                 .accountType(AccountType.COMMON)
+                .build();
+    }
+
+    public static User kakaoLogin(KakaoLoginRequest kakaoLoginRequest) {
+        return User.builder()
+                .email(kakaoLoginRequest.getEmail())
+                .nickname(kakaoLoginRequest.getNickname())
+                .accountType(AccountType.KAKAO)
                 .build();
     }
 }
