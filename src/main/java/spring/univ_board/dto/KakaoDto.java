@@ -6,12 +6,12 @@ import lombok.Getter;
 @Getter
 public class KakaoDto {
 
-    private long id;
     private String nickname;
+    private String email;
 
     @Builder
-    public KakaoDto(long id, String nickname) {
-        this.id = id;
+    public KakaoDto(String nickname, String email) {
         this.nickname = nickname;
+        this.email = email;
     }
 }

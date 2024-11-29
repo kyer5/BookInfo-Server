@@ -103,9 +103,11 @@ public class KakaoService {
         JSONObject profile = (JSONObject) account.get("profile");
 
         String nickname = String.valueOf(profile.get("nickname"));
+        String email = String.valueOf(account.get("email"));
 
         User kakaoUser = new User();
         kakaoUser.setNickname(nickname);
+        kakaoUser.setEmail(email);
         userRepository.save(kakaoUser);
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
@@ -115,6 +117,7 @@ public class KakaoService {
 
         return KakaoDto.builder()
                 .nickname(nickname)
+                .email(email)
                 .build();
     }
 }
