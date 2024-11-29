@@ -1,5 +1,6 @@
 package spring.univ_board.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,14 +13,20 @@ import spring.univ_board.controller.dto.request.SignUpRequest;
 @RequiredArgsConstructor
 public class User extends BaseEntity {
 
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "nickname")
     private String nickname;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "phone")
     private String phone;
 
     @Builder
     public User(String email, String nickname, String password, String phone) {
-        this();
         this.email = email;
         this.nickname = nickname;
         this.password = password;
