@@ -17,16 +17,16 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import spring.univ_board.domain.KakaoUser;
+import spring.univ_board.domain.User;
 import spring.univ_board.dto.KakaoDto;
-import spring.univ_board.repository.KakaoRepository;
+import spring.univ_board.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
 public class KakaoService {
 
     @Autowired
-    private final KakaoRepository kakaoRepository;
+    private final UserRepository userRepository;
 
     @Value("${kakao.client.id}")
     private String KAKAO_CLIENT_ID;
@@ -102,12 +102,11 @@ public class KakaoService {
         JSONObject account = (JSONObject) jsonObj.get("kakao_account");
         JSONObject profile = (JSONObject) account.get("profile");
 
-        long id = (long) jsonObj.get("id");
         String nickname = String.valueOf(profile.get("nickname"));
 
-        KakaoUser kakaoUser = new KakaoUser();
-        kakaoUser.setUsername(nickname);
-        kakaoRepository.save(kakaoUser);
+        User kakaoUser = new User();
+        kakaoUser.setNickname(nickname);
+        userRepository.save(kakaoUser);
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
@@ -115,7 +114,7 @@ public class KakaoService {
         session.setAttribute("member", kakaoUser);
 
         return KakaoDto.builder()
-                .id(id)
-                .nickname(nickname).build();
+                .nickname(nickname)
+                .build();
     }
 }
