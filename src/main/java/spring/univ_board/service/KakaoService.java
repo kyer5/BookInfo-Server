@@ -108,8 +108,9 @@ public class KakaoService {
         User kakaoUser = new User();
         kakaoUser.setNickname(nickname);
         kakaoUser.setEmail(email);
-        userRepository.save(kakaoUser);
-
+        if (userRepository.findByEmail(email).isEmpty()) {
+            userRepository.save(kakaoUser);
+        }
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
         HttpSession session = request.getSession();
