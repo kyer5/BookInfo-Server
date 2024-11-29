@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Getter;
+import spring.univ_board.domain.value.AccountType;
 
 @Getter
 public class SignUpRequest {
@@ -36,15 +37,18 @@ public class SignUpRequest {
     @Pattern(regexp = "^[0-9]+$", message = "전화번호는 숫자만 가능합니다.")
     private String phone;
 
+    private AccountType accountType;
+
     protected SignUpRequest() {
     }
 
     @Builder
-    protected SignUpRequest(String email, String nickname, String password, String passwordCheck, String phone) {
+    protected SignUpRequest(String email, String nickname, String password, String passwordCheck, String phone, AccountType accountType) {
         this.email = email;
         this.nickname = nickname;
         this.password = password;
         this.passwordCheck = passwordCheck;
         this.phone = phone;
+        this.accountType = accountType;
     }
 }

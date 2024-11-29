@@ -2,14 +2,15 @@ package spring.univ_board.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import spring.univ_board.controller.dto.request.SignUpRequest;
+import spring.univ_board.domain.value.AccountType;
 
 @Entity
 @Getter
-@RequiredArgsConstructor
 public class User extends BaseEntity {
 
     @Column(name = "email")
@@ -24,12 +25,20 @@ public class User extends BaseEntity {
     @Column(name = "phone")
     private String phone;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "account_type")
+    private AccountType accountType;
+
+    protected User() {
+    }
+
     @Builder
-    public User(String email, String nickname, String password, String phone) {
+    public User(String email, String nickname, String password, String phone, AccountType accountType) {
         this.email = email;
         this.nickname = nickname;
         this.password = password;
         this.phone = phone;
+        this.accountType = accountType;
     }
 
     public static User singUp(SignUpRequest signUpRequest) {
@@ -38,6 +47,7 @@ public class User extends BaseEntity {
                 .nickname(signUpRequest.getNickname())
                 .password(signUpRequest.getPassword())
                 .phone(signUpRequest.getPhone())
+                .accountType(AccountType.COMMON)
                 .build();
     }
 }
