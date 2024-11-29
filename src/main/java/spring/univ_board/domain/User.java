@@ -5,11 +5,10 @@ import jakarta.persistence.Entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import spring.univ_board.controller.dto.request.SignUpRequest;
 
 @Entity
-@Getter @Setter
+@Getter
 @RequiredArgsConstructor
 public class User extends BaseEntity {
 
