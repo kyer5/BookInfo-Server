@@ -19,7 +19,6 @@ public class BookListResponse {
     private String isbn;
 
     @Builder
-
     public BookListResponse(String imageURL, String title, String author,
                             String publisher, String pubdate, String price, String isbn) {
         this.imageURL = imageURL;
