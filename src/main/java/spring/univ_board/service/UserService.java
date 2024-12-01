@@ -1,5 +1,8 @@
 package spring.univ_board.service;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +21,11 @@ import javax.security.sasl.AuthenticationException;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    public User findUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found."));
+    }
 
     public LoginResponse login(final LoginRequest loginRequest) throws AuthenticationException {
         String email = loginRequest.getEmail();

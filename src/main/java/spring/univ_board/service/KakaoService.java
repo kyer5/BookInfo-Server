@@ -108,13 +108,16 @@ public class KakaoService {
 
         KakaoLoginRequest kakaoLoginRequest = new KakaoLoginRequest(email, nickname);
         User kakaoUser = User.kakaoLogin(kakaoLoginRequest);
+
         if (userRepository.findByEmail(email).isEmpty()) {
             userRepository.save(kakaoUser);
+        } else {
+            kakaoUser = userRepository.findByEmail(email).get();
         }
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
-        session.setAttribute("member", kakaoUser);
+        session.setAttribute("user", kakaoUser);
 
         return KakaoDto.builder()
                 .nickname(nickname)

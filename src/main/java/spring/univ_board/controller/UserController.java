@@ -1,5 +1,6 @@
 package spring.univ_board.controller;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import spring.univ_board.controller.dto.request.LoginRequest;
 import spring.univ_board.controller.dto.request.SignUpRequest;
 import spring.univ_board.controller.dto.response.LoginResponse;
 import spring.univ_board.controller.dto.response.SignUpResponse;
+import spring.univ_board.domain.User;
 import spring.univ_board.service.KakaoService;
 import spring.univ_board.service.UserService;
 
@@ -31,8 +33,10 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseDto<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) throws AuthenticationException {
+    public ResponseDto<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest, HttpSession session) throws AuthenticationException {
         LoginResponse loginResponse = userService.login(loginRequest);
+        User user = userService.findUserById(loginResponse.getUserId());
+        session.setAttribute("user", user);
         return ResponseDto.of(loginResponse, "You have successfully logged in.");
     }
 
