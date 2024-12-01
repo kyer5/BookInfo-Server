@@ -65,7 +65,7 @@ public class BookService {
             String author = bookInformation.getString("author");
             String publisher = bookInformation.getString("publisher");
             String pubdate = bookInformation.getString("pubdate");
-            String discount = bookInformation.getString("discount");
+            String price = bookInformation.getString("discount");
             String isbn = bookInformation.getString("isbn");
 
             bookListResponses.add(BookListResponse.builder()
@@ -74,7 +74,7 @@ public class BookService {
                     .author(author)
                     .publisher(publisher)
                     .pubdate(pubdate)
-                    .discount(discount)
+                    .price(price)
                     .isbn(isbn)
                     .build());
         }
@@ -94,7 +94,7 @@ public class BookService {
         String author = bookInformation.getString("author");
         String publisher = bookInformation.getString("publisher");
         String pubdate = bookInformation.getString("pubdate");
-        String discount = bookInformation.getString("discount");
+        String price = bookInformation.getString("discount");
         String description = bookInformation.getString("description");
         String isbn = bookInformation.getString("isbn");
 
@@ -104,7 +104,7 @@ public class BookService {
                 .author(author)
                 .publisher(publisher)
                 .pubdate(pubdate)
-                .discount(discount)
+                .price(price)
                 .description(description)
                 .isbn(isbn)
                 .build();

@@ -15,19 +15,19 @@ public class BookListResponse {
     private String author;
     private String publisher;
     private String pubdate;
-    private String discount;
+    private String price;
     private String isbn;
 
     @Builder
 
     public BookListResponse(String imageURL, String title, String author,
-                            String publisher, String pubdate, String discount, String isbn) {
+                            String publisher, String pubdate, String price, String isbn) {
         this.imageURL = imageURL;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.pubdate = pubdate;
-        this.discount = discount;
+        this.price = price;
         this.isbn = isbn;
     }
 }

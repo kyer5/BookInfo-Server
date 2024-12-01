@@ -11,19 +11,19 @@ public class BookDetailsResponse {
     private String author;
     private String publisher;
     private String pubdate;
-    private String discount;
+    private String price;
     private String description;
     private String isbn;
 
     @Builder
     public BookDetailsResponse(String imageURL, String title, String author, String publisher,
-                               String pubdate, String discount, String description, String isbn) {
+                               String pubdate, String price, String description, String isbn) {
         this.imageURL = imageURL;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.pubdate = pubdate;
-        this.discount = discount;
+        this.price = price;
         this.description = description;
         this.isbn = isbn;
     }
