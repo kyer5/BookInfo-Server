@@ -22,7 +22,7 @@ public class BookController {
     public String bookList(@ModelAttribute("keyword") String keyword, Model model) throws IOException {
         List<BookListResponse> bookListResponse = bookService.getBookList(keyword);
         model.addAttribute("bookListResponse", bookListResponse);
-        return "book/naverBookList";
+        return "book/bookList";
     }
 
     @GetMapping("/detail")
