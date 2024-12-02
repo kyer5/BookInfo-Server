@@ -54,9 +54,8 @@ public class BookService {
     }
 
     public BookDetailsResponse getBookDetails(String isbnKey) throws IOException {
-        String apiUrl = naverApiService.getApiUrl();
         String encodedIsbn = URLEncoder.encode(isbnKey, "UTF-8");
-        String apiURL = apiUrl + encodedIsbn;
+        String apiURL = naverApiService.getApiUrl() + encodedIsbn;
 
         JSONObject jsonObject = naverApiService.getBookInformation(apiURL);
         JSONArray jsonArray = jsonObject.getJSONArray("items");
