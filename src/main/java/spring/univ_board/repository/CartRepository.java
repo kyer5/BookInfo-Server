@@ -4,7 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import spring.univ_board.domain.Cart;
 import spring.univ_board.domain.User;
 
-public interface CartRepository extends JpaRepository<Cart, String> {
+import java.util.List;
 
-    Cart findByUserAndItemIsbn(User user, String Itemisbn);
+public interface CartRepository extends JpaRepository<Cart, Long> {
+
+    Cart findByUserAndItemIsbn(User user, String ItemIsbn);
+    List<Cart> findByUser(User user);
 }
