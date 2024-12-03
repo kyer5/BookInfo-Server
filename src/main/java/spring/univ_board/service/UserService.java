@@ -44,9 +44,6 @@ public class UserService {
     public UserInformationResponse getUserInformation(User user) {
         return UserInformationResponse.builder()
                 .email(user.getEmail())
-                .passwordCheck(null)
-                .newPassword(null)
-                .newPasswordCheck(null)
                 .phone(user.getPhone())
                 .nickname(user.getNickname())
                 .build();
