@@ -1,8 +1,5 @@
 package spring.univ_board.service;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletRequestWrapper;
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +7,7 @@ import org.springframework.stereotype.Service;
 import spring.univ_board.controller.dto.request.LoginRequest;
 import spring.univ_board.controller.dto.request.SignUpRequest;
 import spring.univ_board.controller.dto.response.LoginResponse;
+import spring.univ_board.controller.dto.response.UserInformationResponse;
 import spring.univ_board.domain.User;
 import spring.univ_board.repository.UserRepository;
 
@@ -41,6 +39,17 @@ public class UserService {
         User signUpUser = User.singUp(signUpRequest);
         User savedUser = userRepository.save(signUpUser);
         return savedUser.getId();
+    }
+
+    public UserInformationResponse getUserInformation(User user) {
+        return UserInformationResponse.builder()
+                .email(user.getEmail())
+                .passwordCheck(null)
+                .newPassword(null)
+                .newPasswordCheck(null)
+                .phone(user.getPhone())
+                .nickname(user.getNickname())
+                .build();
     }
 
     private void validatePassword(String password, User user) throws AuthenticationException {
