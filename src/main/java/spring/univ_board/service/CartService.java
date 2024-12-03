@@ -45,7 +45,6 @@ public class CartService {
     public List<CartListResponse> getCartList(User user) throws IOException {
         List<Cart> carts = cartRepository.findByUser(user);
         List<CartListResponse> cartListResponses = new ArrayList<>();
-        int totalPrice = 0;
         for (int i = 0; i < carts.size(); i++) {
             String itemIsbn = carts.get(i).getItemIsbn();
             System.out.println("itemIsbn = " + itemIsbn);
@@ -54,9 +53,6 @@ public class CartService {
             JSONObject jsonObject = naverApiService.getBookInformation(apiURL);
             JSONArray jsonArray = jsonObject.getJSONArray("items");
             JSONObject bookInformation = jsonArray.getJSONObject(0);
-
-            int price = Integer.parseInt(bookInformation.getString("discount"));
-            totalPrice += price;
 
             cartListResponses.add(CartListResponse.builder()
                     .imageURL(bookInformation.getString("image"))
