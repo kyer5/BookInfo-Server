@@ -21,6 +21,7 @@ public class BookController {
     @GetMapping("/list")
     public String bookList(@ModelAttribute("keyword") String keyword, Model model) throws IOException {
         List<BookListResponse> bookListResponse = bookService.getBookList(keyword);
+        model.addAttribute("keyword", keyword);
         model.addAttribute("bookListResponse", bookListResponse);
         return "book/bookList";
     }
@@ -31,5 +32,4 @@ public class BookController {
         model.addAttribute("bookDetailsResponse", bookDetailsResponse);
         return "book/detailsBook";
     }
-
 }
