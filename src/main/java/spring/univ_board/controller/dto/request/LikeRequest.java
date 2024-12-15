@@ -3,8 +3,7 @@ package spring.univ_board.controller.dto.request;
 import lombok.Getter;
 
 @Getter
-public class AddToCartRequest {
+public class LikeRequest {
 
     private String isbn;
-    private int itemCount;
 }
