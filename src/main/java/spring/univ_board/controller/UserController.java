@@ -47,6 +47,12 @@ public class UserController {
         return "redirect:" + kakaoUrl;
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session. invalidate();
+        return "redirect:/";
+    }
+
     @GetMapping("/signup")
     public String signup() {
         return "user/signup";
