@@ -34,12 +34,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    @ResponseBody
-    public ResponseDto<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest, HttpSession session) throws AuthenticationException {
+    public String login(@Valid @ModelAttribute LoginRequest loginRequest, HttpSession session) throws AuthenticationException {
         LoginResponse loginResponse = userService.login(loginRequest);
         User user = userService.findUserById(loginResponse.getUserId());
         session.setAttribute("user", user);
-        return ResponseDto.of(loginResponse, "You have successfully logged in.");
+        return "redirect:/";
     }
 
     @GetMapping("/login/kakao")
