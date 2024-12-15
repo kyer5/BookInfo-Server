@@ -4,20 +4,18 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class CartListResponse {
+public class LikeListResponse {
 
     private String isbn;
     private String imageURL;
     private String title;
-    private int count;
     private String price;
 
     @Builder
-    public CartListResponse(String isbn, String imageURL, String title, int count, String price) {
+    public LikeListResponse(String isbn, String imageURL, String title, String price) {
         this.isbn = isbn;
         this.imageURL = imageURL;
         this.title = title;
-        this.count = count;
         this.price = price;
     }
 }
