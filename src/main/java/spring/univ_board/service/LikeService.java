@@ -54,4 +54,9 @@ public class LikeService {
         }
         return likeListResponses;
     }
+
+    public LikeResponse cancelLike(Long likeId) {
+        likeRepository.deleteById(likeId);
+        return new LikeResponse(likeId);
+    }
 }

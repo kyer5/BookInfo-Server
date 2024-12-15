@@ -37,4 +37,11 @@ public class LikeController {
         model.addAttribute("likeListResponses", likeListResponses);
         return "like/likeList";
     }
+
+    @DeleteMapping("/cancel")
+    @ResponseBody
+    public ResponseDto<LikeResponse> cancelLike(@RequestParam("likeId") Long likeId) {
+        LikeResponse likeResponse = likeService.cancelLike(likeId);
+        return ResponseDto.of(likeResponse, "Successfully canceled like.");
+    }
 }
