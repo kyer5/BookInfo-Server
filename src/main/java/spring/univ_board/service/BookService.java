@@ -6,8 +6,10 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spring.univ_board.api.NaverApiService;
+import spring.univ_board.controller.dto.request.BookRecommendRequest;
 import spring.univ_board.controller.dto.response.BookDetailsResponse;
 import spring.univ_board.controller.dto.response.BookListResponse;
+import spring.univ_board.controller.dto.response.BookRecommendListResponse;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -82,5 +84,25 @@ public class BookService {
                 .build();
 
         return bookDetailsResponse;
+    }
+
+    public List<BookRecommendListResponse> bookRecommend(BookRecommendRequest bookRecommendRequest) throws IOException {
+        List<BookRecommendListResponse> bookRecommendListResponses = new ArrayList<>();
+        for (int i = 0; i < bookRecommendRequest.getRecommendIsbn().size(); i++) {
+            String encodedIsbn = URLEncoder.encode(bookRecommendRequest.getRecommendIsbn().get(i), "UTF-8");
+            String apiURL = naverApiService.getApiUrl() + encodedIsbn;
+            JSONObject jsonObject = naverApiService.getBookInformation(apiURL);
+            JSONArray jsonArray = jsonObject.getJSONArray("items");
+            JSONObject bookInformation = jsonArray.getJSONObject(0);
+
+            String image = bookInformation.getString("image");
+            String title = bookInformation.getString("title");
+
+            bookRecommendListResponses.add(BookRecommendListResponse.builder()
+                    .imageURL(image)
+                    .title(title)
+                    .build());
+        }
+        return bookRecommendListResponses;
     }
 }
