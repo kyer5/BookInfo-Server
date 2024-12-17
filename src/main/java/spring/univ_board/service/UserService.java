@@ -6,8 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import spring.univ_board.controller.dto.request.LoginRequest;
 import spring.univ_board.controller.dto.request.SignUpRequest;
+import spring.univ_board.controller.dto.request.UserUpdateRequest;
 import spring.univ_board.controller.dto.response.LoginResponse;
 import spring.univ_board.controller.dto.response.UserInformationResponse;
+import spring.univ_board.controller.dto.response.UserUpdateResponse;
 import spring.univ_board.domain.User;
 import spring.univ_board.repository.UserRepository;
 
@@ -39,6 +41,24 @@ public class UserService {
         User signUpUser = User.singUp(signUpRequest);
         User savedUser = userRepository.save(signUpUser);
         return savedUser.getId();
+    }
+
+    @Transactional
+    public UserUpdateResponse userInfoUpdate(User user, UserUpdateRequest userUpdateRequest) throws IllegalAccessException {
+        if (userUpdateRequest.getCurrentPassword() != null) {
+            user.updatePassword(
+                    userUpdateRequest.getCurrentPassword(),
+                    userUpdateRequest.getNewPassword(),
+                    userUpdateRequest.getNewPasswordCheck());
+        }
+        if (userUpdateRequest.getNickname() != null) {
+            user.updateNickname(userUpdateRequest.getNickname());
+        }
+        if (userUpdateRequest.getPhone() != null) {
+            user.updatePhone(userUpdateRequest.getPhone());
+        }
+        userRepository.save(user);
+        return new UserUpdateResponse(user.getId());
     }
 
     public UserInformationResponse getUserInformation(User user) {

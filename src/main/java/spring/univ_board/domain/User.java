@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.transaction.Transactional;
 import lombok.Builder;
 import lombok.Getter;
 import spring.univ_board.controller.dto.request.KakaoLoginRequest;
@@ -58,5 +59,23 @@ public class User extends BaseEntity {
                 .nickname(kakaoLoginRequest.getNickname())
                 .accountType(AccountType.KAKAO)
                 .build();
+    }
+
+    public void updatePassword(String currentPassword, String newPassword, String newPasswordCheck) throws IllegalAccessException {
+        if (!this.password.equals(currentPassword)) {
+            throw new IllegalAccessException("Password incorrect.");
+        }
+        if(!newPassword.equals(newPasswordCheck)) {
+            throw new IllegalAccessException("New password check incorrect.");
+        }
+        this.password = newPassword;
+    }
+
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void updatePhone(String phone) {
+        this.phone = phone;
     }
 }

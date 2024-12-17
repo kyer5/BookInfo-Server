@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import spring.univ_board.controller.dto.ResponseDto;
 import spring.univ_board.controller.dto.request.LoginRequest;
 import spring.univ_board.controller.dto.request.SignUpRequest;
+import spring.univ_board.controller.dto.request.UserUpdateRequest;
 import spring.univ_board.controller.dto.response.LoginResponse;
 import spring.univ_board.controller.dto.response.SignUpResponse;
 import spring.univ_board.controller.dto.response.UserInformationResponse;
+import spring.univ_board.controller.dto.response.UserUpdateResponse;
 import spring.univ_board.domain.User;
 import spring.univ_board.service.KakaoService;
 import spring.univ_board.service.UserService;
@@ -74,5 +76,13 @@ public class UserController {
         UserInformationResponse userInformationResponse = userService.getUserInformation(user);
         model.addAttribute("userInformationResponse", userInformationResponse);
         return "user/mypage";
+    }
+
+    @PatchMapping("/update")
+    @ResponseBody
+    public ResponseDto<UserUpdateResponse> update(HttpSession session, @Valid @RequestBody UserUpdateRequest userUpdateRequest) throws IllegalAccessException {
+        User user = (User) session.getAttribute("user");
+        UserUpdateResponse userUpdateResponse = userService.userInfoUpdate(user, userUpdateRequest);
+        return ResponseDto.of(userUpdateResponse, "Successfully updated user information.");
     }
 }
