@@ -24,9 +24,9 @@ public class LikeController {
 
     @PostMapping("/add")
     @ResponseBody
-    public ResponseDto<LikeResponse> addItem(HttpSession session, @RequestBody LikeRequest likeRequest) {
+    public ResponseDto<LikeResponse> addLike(HttpSession session, @RequestBody LikeRequest likeRequest) {
         User user = (User) session.getAttribute("user");
-        LikeResponse likeResponse = likeService.addItem(user, likeRequest);
+        LikeResponse likeResponse = likeService.addLike(user, likeRequest);
         return ResponseDto.of(likeResponse, "Successfully clicked the like button.");
     }
 

@@ -26,7 +26,7 @@ public class LikeService {
     private final NaverApiService naverApiService;
 
     @Transactional
-    public LikeResponse addItem(User user, LikeRequest likeRequest) {
+    public LikeResponse addLike(User user, LikeRequest likeRequest) {
         Like like = Like.builder()
                 .user(user)
                 .itemIsbn(likeRequest.getIsbn())
