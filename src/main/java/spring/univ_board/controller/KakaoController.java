@@ -2,12 +2,11 @@ package spring.univ_board.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import spring.univ_board.controller.dto.ResponseDto;
-import spring.univ_board.dto.KakaoDto;
 import spring.univ_board.service.KakaoService;
 
-@RestController
+@Controller
 @RequestMapping("/kakao")
 @RequiredArgsConstructor
 public class KakaoController {
@@ -15,8 +14,8 @@ public class KakaoController {
     private final KakaoService kakaoService;
 
     @GetMapping("/login")
-    public ResponseDto<KakaoDto> kakaoLogin(HttpServletRequest request) throws Exception {
-        KakaoDto kakaoDto = kakaoService.getKakaoInfo(request.getParameter("code"));
-        return ResponseDto.of(kakaoDto, "You have successfully logged in with your Kakao account.");
+    public String kakaoLogin(HttpServletRequest request) throws Exception {
+        kakaoService.getKakaoInfo(request.getParameter("code"));
+        return "redirect:/";
     }
 }
