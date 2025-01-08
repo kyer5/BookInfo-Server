@@ -21,6 +21,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -36,6 +37,7 @@ dependencies {
 	implementation 'net.minidev:json-smart:2.4.11'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.json:json:20210307'
+	implementation 'io.github.cdimascio:dotenv-java:3.1.0'
 
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3' // mybatis
 	runtimeOnly 'com.mysql:mysql-connector-j' // mysql 드라이버
