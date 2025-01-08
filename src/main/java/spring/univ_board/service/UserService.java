@@ -38,6 +38,9 @@ public class UserService {
 
     @Transactional
     public Long signUp(final SignUpRequest signUpRequest) {
+        if (userRepository.findByEmail(signUpRequest.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("This email already exists.");
+        }
         User signUpUser = User.singUp(signUpRequest);
         User savedUser = userRepository.save(signUpUser);
         return savedUser.getId();
