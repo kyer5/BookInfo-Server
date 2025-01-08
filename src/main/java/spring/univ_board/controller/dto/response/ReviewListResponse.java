@@ -12,14 +12,16 @@ public class ReviewListResponse {
     private Long id;
     private String title;
     private String content;
+    private Long userId;
     private String reviewer;
     private LocalDate createdAt;
 
     @Builder
-    public ReviewListResponse(Long id, String title, String content, String reviewer, LocalDate createdAt) {
+    public ReviewListResponse(Long id, String title, String content, Long userId, String reviewer, LocalDate createdAt) {
         this.id = id;
         this.title = title;
         this.content = content;
+        this.userId = userId;
         this.reviewer = reviewer;
         this.createdAt = createdAt;
     }
