@@ -27,6 +27,4 @@ public class BookDetailsResponse {
         this.description = description;
         this.isbn = isbn;
     }
-
-
 }
