@@ -1,12 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html th:fragment="layout">
 <head>
   <meta charset="UTF-8">
-  <title>-- Index Board-02 --</title>
+  <title>index page</title>
+  <th:block th:replace="~{common/config::config}"></th:block>
 </head>
 <body>
-<h2>Index Board-02</h2>
-<a href="/list">도서목록</a>
-<a href="/addBook">도서추가</a>
+<!--header-->
+<th:block th:replace="~{common/header::header}"></th:block>
+<main>
+  <div class="content-wrap">
+    <h2>추천 도서</h2>
+    <div class="recommend-prod-box-container">
+      <ul class="recommend-prod-box" id="book-list">
+        <li class="recommend-prod-info" th:each="bookRecommendListResponse : ${bookRecommendListResponses}">
+          <div>
+            <img class="recommend-prod-img" th:src="${bookRecommendListResponse.imageURL}"/>
+            <div class="recommend-prod-title">
+              <div th:text="${bookRecommendListResponse.title}">title</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</main>
+<!--footer
+<th:block th:replace="~{common/footer::footer}"></th:block>-->
+<script th:src="@{/js/recommend_book.js}"></script>
 </body>
 </html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>detail book page</title>
+  <th:block th:replace="~{common/config::config}"></th:block>
+  <link rel="stylesheet" th:href="@{/css/detailsBook.css}">
+  <link rel="stylesheet" th:href="@{/css/review.css}">
+</head>
+<body>
+<!--header-->
+<th:block th:replace="~{common/header::header}"></th:block>
+<main>
+  <div class="content-wrap" th:each="bookDetailsResponse : ${bookDetailsResponse}">
+    <div class="prod-detail-header">
+      <div class="prod-image-box">
+        <img th:src="${bookDetailsResponse.imageURL}"/>
+      </div>
+      <div class="prod-detail-box">
+        <div class="prod-detailInfo">
+          <div class="prod-title" th:text="${bookDetailsResponse.title}">title</div>
+          <div class="prod-info-2">
+            <div class="prod-author-info">
+              <div class="prod-info">
+                저자:&nbsp;
+                <div th:text="${bookDetailsResponse.author}">author</div>
+              </div>
+              <div class="prod-info">
+                출판사:&nbsp;
+                <div th:text="${bookDetailsResponse.publisher}">publisher</div>
+              </div>
+            </div>
+            <div class="prod-info">
+              출간일:&nbsp;
+              <div th:text="${bookDetailsResponse.pubdate}">pubdate</div>
+            </div>
+            <div class="prod-info">
+              가격:&nbsp;
+              <div th:text="${bookDetailsResponse.price}">price</div>
+              원
+            </div>
+            <div class="prod-info">
+              isbn:&nbsp;
+              <div th:text="${bookDetailsResponse.isbn}">isbn</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="prod-detail-body">
+      <div>
+        <div class="prod-description">
+          도서 소개
+        </div>
+        <div th:text="${bookDetailsResponse.description}">description</div>
+      </div>
+      <div class="prod-review">
+        <div class="review">리뷰</div>
+        <hr>
+        <div class="review-box">
+          <div class="review-list">
+            <div class="review-box-top">
+              <div class="review-top">번호</div>
+              <div class="review-top">제목</div>
+              <div class="review-top">내용</div>
+              <div class="review-top">작성자</div>
+              <div class="review-top">작성일</div>
+            </div>
+            <hr>
+            <div th:each="reviewListResponses, iterStat : ${reviewListResponses}">
+              <div class="review-box-inner">
+                <div class="review-id">
+                  <div th:text="${iterStat.index + 1}">번호</div>
+                </div>
+                <div class="review-title">
+                  <div th:text="${reviewListResponses.title}">title</div>
+                </div>
+                <div class="review-content">
+                  <div th:text="${reviewListResponses.content}">content</div>
+                </div>
+                <div class="review-reviewer">
+                  <div th:text="${reviewListResponses.reviewer}">reviewer</div>
+                </div>
+                <div class="review-date">
+                  <div th:text="${reviewListResponses.createdAt}">createdAt</div>
+                </div>
+                <div th:if="${session.user != null and reviewListResponses.userId == session.user.id}">
+                  <form th:action="@{/review/delete?reviewId={reviewId}(reviewId=${reviewListResponses.id})}"
+                        method="post">
+                    <button class="delete-btn" type="submit">삭제</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="review-write-box" th:if="${session.user != null}">
+          <form class="review-write" id="review">
+            <input class="review-write-title" id="title" name="title" required placeholder="제목을 입력해주세요.">
+            <textarea class="review-write-content" id="content" name="content" required
+                      placeholder="내용을 입력해주세요."></textarea>
+            <input class="review-regist-btn" type="submit" th:attr="data-isbn-value=${bookDetailsResponse.isbn}"
+                   value="등록하기">
+          </form>
+        </div>
+        <div th:unless="${session.user != null}" class="review-login-prompt">
+          <div class="login-notice">
+            <div>리뷰 작성은 로그인 후 가능합니다.</div>
+            <div class="move-login-page">
+              <a href="/user/login">로그인 하러 가기</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script th:src="@{/js/review.js}"></script>
+</body>
+</html>

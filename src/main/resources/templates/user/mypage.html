@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html th:fragment="layout">
+<head>
+  <meta charset="UTF-8">
+  <title>mypage</title>
+  <th:block th:replace="~{common/config::config}"></th:block>
+  <link rel="stylesheet" th:href="@{/css/mypage.css}">
+</head>
+<body>
+<!--header-->
+<th:block th:replace="~{common/header::header}"></th:block>
+<hr>
+<main>
+  <div class="content-wrap">
+    <div class="mypage-box">
+      <h2>회원 정보 수정</h2>
+      <form class="user-update-box" id="updateUser" th:each="userInformationResponse : ${userInformationResponse}">
+        <div class="mypage-input-box">
+          <div class="mypage-text">이메일</div>
+          <input type="text" id="email" name="email" th:value="${userInformationResponse.email}" readonly>
+        </div>
+        <div class="mypage-input-box">
+          <div class="mypage-text">현재 비밀번호</div>
+          <input type="password" id="currentPassword" name="currentPassword">
+        </div>
+        <div class="mypage-input-box">
+          <div class="mypage-text">새 비밀번호</div>
+          <input type="password" id="newPassword" name="newPassword">
+        </div>
+        <div class="mypage-input-box">
+          <div class="mypage-text">새 비밀번호 확인</div>
+          <input type="password" id="newPasswordCheck" name="newPasswordCheck">
+        </div>
+        <div class="mypage-input-box">
+          <div class="mypage-text">닉네임</div>
+          <input type="text" id="nickname" name="nickname" th:value="${userInformationResponse.nickname}">
+        </div>
+        <div class="mypage-input-box">
+          <div class="mypage-text">휴대전화번호</div>
+          <input type="text" id="phone" name="phone" th:value="${userInformationResponse.phone}">
+        </div>
+        <input class="mypage-btn" type="submit" value="회원정보수정">
+        <script th:src="@{/js/mypage.js}"></script>
+      </form>
+    </div>
+  </div>
+</main>
+</body>
+</html>

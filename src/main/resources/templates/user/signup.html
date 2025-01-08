@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html th:fragment="layout">
+<head>
+  <meta charset="UTF-8">
+  <title>signup page</title>
+  <th:block th:replace="~{common/config::config}"></th:block>
+  <link rel="stylesheet" th:href="@{/css/signup.css}">
+</head>
+<body>
+<!--header-->
+<th:block th:replace="~{common/header::header}"></th:block>
+<main>
+  <div class="content-wrap">
+    <div class="signup-box">
+      <h2>회원가입</h2>
+      <form id="dataForm">
+        <div class="signup-input-box">
+          <div class="signup-text">이메일</div>
+          <input type="text" id="email" name="email" required placeholder="이메일을 입력해주세요.">
+        </div>
+        <div class="signup-input-box">
+          <div class="signup-text">닉네임</div>
+          <input type="text" id="nickname" name="nickname" required placeholder="닉네임을 입력해주세요.">
+        </div>
+        <div class="signup-input-box">
+          <div class="signup-text">휴대전화번호</div>
+          <input type="text" id="phone" name="phone" required placeholder="ex) 01012345678">
+        </div>
+        <div class="signup-input-box">
+          <div class="signup-text">비밀번호</div>
+          <input type="password" id="password" name="password" required placeholder="비밀번호를 입력해주세요.">
+        </div>
+        <div class="signup-input-box">
+          <div class="signup-text">비밀번호 확인</div>
+          <input type="password" id="passwordCheck" name="passwordCheck" required placeholder="비밀번호를 다시 입력해주세요.">
+        </div>
+        <input class="signup-btn" type="submit" value="가입하기">
+      </form>
+    </div>
+  </div>
+</main>
+<script th:src="@{/js/signup.js}"></script>
+</body>
+</html>

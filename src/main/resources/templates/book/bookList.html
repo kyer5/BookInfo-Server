@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>book list page</title>
+  <th:block th:replace="~{common/config::config}"></th:block>
+  <link rel="stylesheet" th:href="@{/css/bookList.css}">
+</head>
+<body>
+<!--header-->
+<th:block th:replace="~{common/header::header}"></th:block>
+<main>
+  <div class="content-wrap">
+    <ul class="prod-list">
+      <h2 th:each="keyword : ${keyword}">
+        '
+        <div class="search-keyword" th:text="${keyword}">keyword</div>
+        '에 대한 검색결과
+      </h2>
+      <li th:each="bookListResponse : ${bookListResponse}">
+        <div class="prod-item">
+          <div class="prod-image-box">
+            <img th:src="${bookListResponse.imageURL}" width="100" height="150" alt="Book Image"/>
+          </div>
+          <div class="prod-info-box">
+            <div>
+              <a th:href="@{/book/detail(isbn=${bookListResponse.isbn})}">
+                <div class="prod-title" th:text="${bookListResponse.title}">title</div>
+              </a>
+            </div>
+            <div>
+              <div class="prod-info">
+                저자:&nbsp;
+                <div th:text="${bookListResponse.author}">author</div>
+              </div>
+              <div class="prod-info">
+                출판사:&nbsp;
+                <div th:text="${bookListResponse.publisher}">publisher</div>
+              </div>
+              <div class="prod-info">
+                가격:&nbsp;
+                <div class="prod-price" th:text="${bookListResponse.price}">price</div>
+                원
+              </div>
+              <div class="prod-info">
+                출판일:&nbsp;
+                <div class="prod-pubdate" th:text="${bookListResponse.pubdate}">pubdate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </li>
+    </ul>
+  </div>
+</main>
+</body>
+</html>

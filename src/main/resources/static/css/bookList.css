@@ -1,0 +1,36 @@
+.prod-image-box img {
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.prod-item {
+    padding: 10px;
+}
+
+.prod-info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 30px;
+    margin-right: 100px;
+}
+
+.prod-info {
+    display: flex;
+    flex-direction: row;
+    color: gray;
+    margin-bottom: 8px;
+}
+
+.prod-item {
+    display: flex;
+    flex-direction: row;
+}
+
+.prod-btn-wrap {
+    margin-left: auto;
+}
+
+.prod-title {
+    font-size: 18px;
+}

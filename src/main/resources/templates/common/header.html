@@ -1,0 +1,33 @@
+<header>
+  <div class="header-inner">
+    <div id="header-inner-01">
+      <nav>
+        <ul>
+          <li th:if="${session.user == null}">
+            <a href="/user/signup">회원가입</a>
+          </li>
+          <li th:if="${session.user == null}">
+            <a href="/user/login">로그인</a>
+          </li>
+          <li th:if="${session.user != null}">
+            <a href="/user/mypage" th:text="${session.user.nickname} + '님'"></a>
+          </li>
+          <li th:if="${session.user != null}">
+            <a href="/user/logout">로그아웃</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div id="header-inner-02">
+      <h1><a href="/"><img th:src="@{/img/BookInfo_icon.png}" height="60" width="60"/>BookInfo</a></h1>
+      <form action="/book/list" method="get">
+        <div class="search-box">
+          <input type="text" th:name="keyword" placeholder="검색어를 입력해주세요.">
+          <button type="submit">
+            <img th:src="@{/img/search.png}" height="20" width="20"/>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</header>
