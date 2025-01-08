@@ -24,4 +24,10 @@ public class ReviewController {
         ReviewCreateResponse reviewCreateResponse = reviewService.createReview(user, reviewCreateRequest);
         return ResponseDto.of(reviewCreateResponse, "Successfully reviewed Registered.");
     }
+
+    @PostMapping("/delete")
+    public String deleteReview(@RequestParam("reviewId") Long reviewId) {
+        reviewService.deleteReview(reviewId);
+        return "redirect:/";
+    }
 }

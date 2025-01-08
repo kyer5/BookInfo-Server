@@ -41,8 +41,13 @@ public class ReviewService {
                     .content(reviews.get(i).getContent())
                     .reviewer(reviews.get(i).getUser().getNickname())
                     .createdAt(reviews.get(i).getCreatedAt().toLocalDate())
+                    .userId(reviews.get(i).getUser().getId())
                     .build());
         }
         return reviewListResponses;
+    }
+
+    public void deleteReview(Long reviewId) {
+        reviewRepository.deleteById(reviewId);
     }
 }
